@@ -2,7 +2,7 @@
 
  MongoClient.connect('mongodb://localhost:27017', (err, client) => {
  	if (err) {
- 		return	console.log('Unable to connect to MongoDB server');
+ 		return	console.log('Unable to connect to MongoDB server', err);
  	} 
  	console.log('Connected to MongoDB server');
 

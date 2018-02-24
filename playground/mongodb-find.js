@@ -24,7 +24,7 @@
  	// 	console.log(err);
  	// });
 
- 	db.collection('Users').find({name: 'Manisha'}).toArray().then((docs) => {
+ 	db.collection('Users').find({name: 'Mohan Munisifreddy'}).toArray().then((docs) => {
  		console.log(JSON.stringify(docs, undefined, 3));
  	}, (err) => {
  		console.log(err);
