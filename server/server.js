@@ -1,6 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-
+var util = require('util');
 var {mongoose} = require('./db/mongoose');
 var {Todo} = require('./models/todo');
 var {User} = require('./models/user');
@@ -16,6 +16,14 @@ app.post('/todos', (req, res) => {
 
 	todo.save().then( (doc) => {
 		res.send(doc);
+	}, (err) => {
+		res.status(400).send(err);
+	});
+});
+
+app.get('/todos', (req, res) => {
+	Todo.find().then( (todos) => {
+		res.send({todos});
 	}, (err) => {
 		res.status(400).send(err);
 	});
