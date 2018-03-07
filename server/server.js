@@ -28,10 +28,13 @@ app.post('/todos', (req, res) => {
 });
 
 app.get('/todos', (req, res) => {
+	console.log('running /todos');
 	Todo.find().then( (todos) => {
 		res.send({todos});
+		console.log('---> success');
 	}, (err) => {
 		res.status(400).send(err);
+		console.log('---> error');
 	});
 });
 
@@ -92,6 +95,19 @@ app.patch('/todos/:id', (req, res) => {
 
 		res.send({todo});
 	}).catch( (err) => res.status(400).send());
+});
+
+app.post('/users', (req, res) => {
+	var body = _.pick(req.body, ['email','password']);
+	var user = new User(body);
+
+	user.save().then( () => {
+		return user.generateAuthToken();
+	}).then( (token) => {
+		res.header('x-auth', token).send({user});
+	}).catch( (err) => {
+		res.status(400).send(err)
+	});
 });
 
 app.listen(port, () => {
