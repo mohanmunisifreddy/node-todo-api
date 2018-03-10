@@ -13,7 +13,7 @@ const users = [ {
 	password: 'userOnePass',
 	tokens: [{
 		access: 'auth',
-		token: jwt.sign({_id: userOneId, access: 'auth'}, 'abc123').toString()
+		token: jwt.sign({_id: userOneId, access: 'auth'}, process.env.JWT_SECRET).toString()
 	}]
 }, {
 	_id: userTwoId,
@@ -40,14 +40,17 @@ const populateTodos = (done) => {
 };
 
 const populateUsers = (done) => {
-	User.remove({}).then( () => {
-		var userOne = new User(users[0]).save();
-		var userTwo = new User(users[1]).save();
+	// User.remove({}).then( () => {
+	// 	var userOne = new User(users[0]).save();
+	// 	var userTwo = new User(users[1]).save();
 
-		return Promise.all([userOne, userTwo]);
-	}).then( () => done()).catch( (err) => {
-		return done(err);
-	});
+	// 	return Promise.all([userOne, userTwo]);
+	// }).then( () => done()).catch( (err) => {
+	// 	return done(err);
+	// });
+	User.remove({}).then( () => {
+		return User.insertMany(users);
+	}).then( () => done());
 };
 
 module.exports = {todos, populateTodos, users, populateUsers};

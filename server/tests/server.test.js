@@ -68,7 +68,7 @@ describe('GET /todos', () => {
 		.end(done());
 	});	
 });
-
+/*
 describe('GET /todos/:id', () => {
 	it('should return todo doc', (done) => {
 		request(app)
@@ -321,4 +321,4 @@ describe('DELETE /users/me/token', () => {
 		   		});
 		   });	
 	});
-});
+});*/
